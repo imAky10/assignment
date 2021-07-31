@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment</title>
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        h2{
+            text-align: center;
+            margin-top:20px;
+            margin-bottom: 30px;
+        }
+
+        form{
+            margin: auto;
+            width: 300px;
+            height: 100px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        form input,button{
+            padding: 5px;
+        }
+        
+        form label{
+            margin-bottom: 5px;
+        }
+    </style>
+    
+</head>
+<body>
+    <div>
+        <h2>Assignment</h2>
+        <form action="/submit" method="POST" autocomplete="off">
+            <input type="text" name="name" placeholder="Enter username..." />
+            <br/>
+            <label for="lat">Latitude of user's position: </label>
+            <input type="text" name="lat" id="lati" readonly />
+            <br/>
+            <label for="long">Longitude of user's position: </label>
+            <input type="text" name="long" id="longi" readonly />
+            <br/>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        
+        var x = document.getElementById("lati");
+        var y = document.getElementById("longi");
+        window.onload = function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.watchPosition(showPosition);
+            } else {
+                x.value = "Geolocation is not supported.";
+                y.value = "Geolocation is not supported.";
+
+            }
+            function showPosition(position) {
+                x.value = position.coords.latitude;
+                y.value = position.coords.longitude;
+            }
+        }
+        
+    </script>
+</body>
+</html>
